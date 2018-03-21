@@ -16,14 +16,14 @@ echo '::: 升级版本号'
     cd ..
 
 echo ':::::: 推送到NPM'
-   # npm publish pub
+    npm publish pub
 
 if [ $? -eq 0 ]; then
     echo '::::::::: 将package.json写回主项目'
         cp -R ./pub/package.json ./package.json
 
     echo '::::::::::: 删除临时目录 pub'
-        #rm -rf ./pub
+        rm -rf ./pub
 
     echo ':::::::::::: Git Mark 此次修改信息'
     git add .
