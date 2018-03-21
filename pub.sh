@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo ':::复制脚手架文件package.json'
+cp -R ./package.json ./pub/package.json
+
 _ov=`npm view masterrt.seed version`
 
 echo '::: 升级版本号'
