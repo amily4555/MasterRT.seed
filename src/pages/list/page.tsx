@@ -1,9 +1,10 @@
 import React from 'react';
 import router from 'umi/router';
 import styles from './page.less';
-import {EchartsComponent} from '../../../pub/echarts/echarts.component';
-// import {EchartsComponent} from '../../lib/echarts/echarts.component';
+import {MrEcharts} from '../../../pub/mr-echarts/echarts.component';
+// import {EchartsComponent} from '../../lib/mr-echarts/mr-echarts.component';
 // import {Hello} from '../../lib/hello/hello.component';
+import {EchartsComponent} from 'masterrt/echarts/echarts.component';
 
 export default () => (
     <div className={styles.normal}>
@@ -16,6 +17,7 @@ export default () => (
             Back
         </div>
 
+        <MrEcharts />
         <EchartsComponent />
     </div>
 );

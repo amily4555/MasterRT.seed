@@ -1,20 +1,5 @@
 #!/usr/bin/env bash
 
-echo ':::删除可能存在的编译文件夹pub'
-rm -rf ./pub
-
-echo ':::新建编译文件夹pub'
-mkdir ./pub
-
-echo ':::复制资源文件 assets'
-cp -R ./src/lib/assets ./pub/assets
-
-echo ':::复制脚手架文件package.json'
-cp -R ./package.json ./pub/package.json
-
-echo ':::编译文件'
-npm run compile
-
 _ov=`npm view masterrt.seed version`
 
 echo '::: 升级版本号'
@@ -31,13 +16,14 @@ echo ':::::: 推送到NPM'
     npm publish pub
 
 if [ $? -eq 0 ]; then
-    echo '::::::::: 将package.json写回主项目'
-        cp -R ./pub/package.json ./package.json
+    echo '::::::::: 将package.json写回项目'
+        cp -R ./pub/package.json ./src/lib/package.json
 
     echo '::::::::::: 删除临时目录 pub'
         rm -rf ./pub
 
     echo ':::::::::::: Git Mark 此次修改信息'
+    git pull
     git add .
     git commit -am "$_ov -> $_uv"
     git pull
