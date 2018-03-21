@@ -1,12 +1,12 @@
 {
     "name": "masterrt",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "license": "MIT",
     "scripts": {
         "start": "umi dev",
         "build": "umi build",
         "clean": "rm -rf ./pub",
-        "prepub": "npm run clean && tsc -p ./tsconfig.pub.json",
+        "compile": "tsc -p ./tsconfig.pub.json",
         "pub": "bash ./pub.sh"
     },
     "private": false,
