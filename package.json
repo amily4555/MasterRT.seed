@@ -1,9 +1,22 @@
 {
-    "name": "ts-umi-dva",
+    "name": "masterrt",
     "version": "0.0.1",
+    "license": "MIT",
     "scripts": {
         "start": "umi dev",
-        "build": "umi build"
+        "build": "umi build",
+        "clean": "rm -rf ./pub",
+        "prepub": "npm run clean && tsc -p ./tsconfig.pub.json",
+        "pub": "npm publish"
+    },
+    "private": false,
+    "author": ["Mizi Lin<amily4555@gmail.com>", "MingZhe Wang<wangmingzhe@admaster.com.cn>"],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/amily4555/MasterRT.seed.git"
+    },
+    "bugs": {
+        "url": "https://github.com/amily4555/MasterRT.seed/issues"
     },
     "dependencies": {
         "antd": "^3.3.1",

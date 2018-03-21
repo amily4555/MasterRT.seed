@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "outDir": "./pub",
+        "target": "es5",
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "declaration": true,
+        "sourceMap": true,
+        "jsx": "react",
+        "listFiles": true,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2016",
+            "dom"
+        ]
+    },
+    "include": ["./src/lib/**/*.tsx", "./src/lib/**/*.ts"],
+    "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx"]
+}

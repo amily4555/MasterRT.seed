@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router as DefaultRouter, Route, Switch } from 'react-router-dom';
 import dynamic from 'umi/dynamic';
-import Layout from '/Users/Clish/Downloads/Workspace/ts-umi-dva/src/layouts/index.tsx';
+import Layout from '/Users/Mizi/git/MasterRT.seed/src/layouts/index.tsx';
 import { routerRedux } from 'dva/router';
 
 
@@ -16,7 +16,7 @@ export default function() {
 <Router history={window.g_history}>
   <Layout><Switch>
     <Route exact path="/" component={require('../index/page.tsx').default} />
-    <Route exact path="/list" component={() => React.createElement(require('/Users/Clish/Downloads/Workspace/ts-umi-dva/node_modules/umi-build-dev/lib/Compiling.js').default, { route: '/list' })} />
+    <Route exact path="/list" component={require('../list/page.tsx').default} />
   </Switch></Layout>
 </Router>
   );
