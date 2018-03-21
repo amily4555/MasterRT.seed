@@ -16,7 +16,7 @@ echo '::: 升级版本号'
     cd ..
 
 echo ':::::: 推送到NPM'
-    npm publish pub
+   # npm publish pub
 
 if [ $? -eq 0 ]; then
     echo '::::::::: 将package.json写回主项目'
