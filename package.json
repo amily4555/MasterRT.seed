@@ -1,6 +1,6 @@
 {
     "name": "masterrt",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "license": "MIT",
     "scripts": {
         "start": "umi dev",
@@ -11,8 +11,7 @@
     },
     "private": false,
     "author": [
-        "Mizi Lin<amily4555@gmail.com>",
-        "MingZhe Wang<wangmingzhe@admaster.com.cn>"
+        "Mizi Lin<amily4555@gmail.com>"
     ],
     "repository": {
         "type": "git",

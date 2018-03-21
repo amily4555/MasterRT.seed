@@ -23,7 +23,7 @@ if [ $? -eq 0 ]; then
         cp -R ./pub/package.json ./package.json
 
     echo '::::::::::: 删除临时目录 pub'
-        rm -rf ./pub
+        #rm -rf ./pub
 
     echo ':::::::::::: Git Mark 此次修改信息'
     git add .
