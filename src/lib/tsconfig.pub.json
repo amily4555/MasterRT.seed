@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "./pub",
+        "outDir": "./",
         "target": "es6",
         "module": "es6",
         "noImplicitAny": true,
@@ -21,7 +21,14 @@
             "dom"
         ]
     },
-    "include": ["./src/lib/**/*.tsx", "./src/lib/**/*.ts"],
-    "exclude": ["node_modules", "**/*.spec.ts", "**/*.spec.tsx"],
+    "include": [
+        "../src/lib/**/*.tsx",
+        "../src/lib/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts",
+        "**/*.spec.tsx"
+    ],
     "allowSyntheticDefaultImports": true
 }

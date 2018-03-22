@@ -1,5 +1,9 @@
 import * as React from 'react';
-import styles from '../assets/echarts.component.less';
+
+// import * as styles from '../assets/echarts.component.less';
+
+declare var require: any;
+const styles = require('../assets/echarts.component.less');
 
 export class MrEcharts extends React.Component<{}, {}> {
     constructor() {
@@ -7,6 +11,8 @@ export class MrEcharts extends React.Component<{}, {}> {
     }
 
     render() {
-        return <h1 className={styles.echartsBox}>Hello world</h1>;
+        return <div>
+            <h1 className={styles.echartsBox}>Hello world</h1>
+        </div>;
     }
 }

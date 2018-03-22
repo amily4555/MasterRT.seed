@@ -6,7 +6,7 @@
         "start": "umi dev",
         "build": "umi build",
         "clean": "rm -rf ./pub",
-        "compile": "tsc -p ./tsconfig.pub.json",
+        "compile": "tsc -p ./pub/tsconfig.pub.json",
         "tsd": "bash ./build.sh",
         "pub": "bash ./pub.sh"
     },
@@ -24,7 +24,7 @@
     "dependencies": {
         "antd": "^3.3.1",
         "dva": "^2.1.0",
-        "masterrt": "0.0.5",
+        "masterrt": "0.0.6",
         "umi": "^1.0.8",
         "umi-plugin-dva": "^0.3.4"
     },

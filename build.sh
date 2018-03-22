@@ -12,5 +12,8 @@ cp -R ./src/lib/assets ./pub/assets
 echo ':::复制脚手架文件package.json'
 cp -R ./src/lib/package.json ./pub/package.json
 
+echo ':::复制脚手架文件package.json'
+cp -R ./src/lib/tsconfig.pub.json ./pub/tsconfig.pub.json
+
 echo ':::编译文件'
 npm run compile
