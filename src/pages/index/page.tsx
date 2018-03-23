@@ -5,6 +5,8 @@ import A from '../../components/A';
 import styles from './page.less';
 
 export default () => {
+
+
   return (
     <div className={styles.normal}>
       <h2>Index Page</h2>
