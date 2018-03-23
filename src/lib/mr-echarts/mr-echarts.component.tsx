@@ -3,6 +3,9 @@ import * as React from 'react';
 import * as echarts from 'echarts';
 import * as _ from 'lodash';
 import * as mu from 'mzmu';
+import 'echarts-wordcloud';
+import '../assets/china.js';
+import '../assets/theme.customed.js';
 import _sevr from './mr-echarts.services';
 const styles = require('../assets/echarts.component.less');
 
