@@ -8,7 +8,7 @@
         "clean": "rm -rf ./pub",
         "compile": "tsc -p ./pub/tsconfig.pub.json",
         "tsd": "bash ./build.sh",
-        "pub": "bash ./pub.sh"
+        "pub": "npm run tsd && bash ./pub.sh"
     },
     "private": false,
     "author": [
@@ -27,7 +27,7 @@
         "echarts": "^4.0.4",
         "echarts-wordcloud": "^1.1.3",
         "lodash": "^4.17.5",
-        "masterrt": "^0.1.0",
+        "masterrt": "^0.1.1-b1",
         "mzmu": "^1.8.15",
         "ramda": "^0.25.0",
         "umi": "^1.0.8",
