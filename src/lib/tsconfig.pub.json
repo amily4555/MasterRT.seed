@@ -5,7 +5,7 @@
         "module": "es6",
         "noImplicitAny": false,
         "removeComments": true,
-        "declaration": true,
+        "declaration": false,
         "sourceMap": true,
         "jsx": "react",
         "listFiles": false,

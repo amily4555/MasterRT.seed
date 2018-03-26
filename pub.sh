@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+echo ':::编译文件'
+npm run tsd
 
 _ov=`npm view masterrt.seed version`
 

@@ -159,6 +159,6 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
     }
 
     render() {
-        return <div className={styles['re-echarts'] || 're-echarts'} ref={(div) => (this._chartRef = div)} />;
+        return <div className={styles['mr-echarts'] || 'mr-echarts'} ref={(div) => (this._chartRef = div)} />;
     }
 }
