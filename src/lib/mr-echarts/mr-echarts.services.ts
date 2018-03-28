@@ -217,6 +217,31 @@ const subSetting = {
         '$$xAxis[*].axisLabel.formatter': '{value}%'
     },
 
+    // 柱形阶梯瀑布图
+    // 默认拾级上升
+    '::ladder': {
+        '**series': (obj) => {
+            let _series = obj.series;
+            let _data0 = mu.clone(_series[0]);
+            let _d = _data0.data;
+            _data0.name = 'ladder dark start';
+            _.set(_data0, 'itemStyle.barBorderColor', 'rgba(0, 0, 0, 0)');
+            _.set(_data0, 'itemStyle.color', 'rgba(0, 0, 0, 0)');
+            _.set(_data0, 'itemStyle.emphasis.barBorderColor', 'rgba(0, 0, 0, 0)');
+            _.set(_data0, 'itemStyle.emphasis.color', 'rgba(0, 0, 0, 0)');
+            _.set(_data0, 'tooltip.show', false);
+            _d = mu.map(_d, o => o.value);
+            _d.unshift(0);
+            _d.pop();
+            mu.each(_d, (o, inx) => {
+                _d[inx] = o + (_d[inx -1] || 0);
+            });
+            _data0.data = _d;
+            _series.unshift(_data0);
+            return obj.series;
+        }
+    },
+
     pie: {
         '$$series[*].center': ['50%', '55%']
     },
