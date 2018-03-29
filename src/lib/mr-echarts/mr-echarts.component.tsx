@@ -40,7 +40,7 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
         mu.empty(
             this._chart,
             () => {
-                this._chart = echarts.init(_dom, theme || _sevr.CHART_THEME, {
+                this._chart = echarts.init(_dom, theme || _sevr._theme, {
                     renderer: renderType || _sevr.CHART_RENDER_TYPE
                 });
             },

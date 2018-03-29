@@ -541,5 +541,14 @@
         }
     });
 
-    return colors;
+
+
+    return {
+        base: colors,
+        pn: {
+            POSITIVE: 'rgba(24,127,197,1)',
+            NEGATIVE: 'rgba(255,135,31,1)',
+            NEUTRAL: 'rgba(24,127,197,.5)',
+        }
+    };
 }));
