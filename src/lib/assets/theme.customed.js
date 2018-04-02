@@ -10,7 +10,7 @@
         module.exports = factory({}, root.echarts);
     }
 }(this, function (exports, echarts) {
-    let log = function (msg) {
+    var log = function (msg) {
         if (typeof console !== 'undefined') {
             console && console.error && console.error(msg);
         }
@@ -20,7 +20,7 @@
         return;
     }
 
-    let colors = [
+    var colors = [
         "#187fc5",
         "#0bbfff",
         "#8fd9f3",
