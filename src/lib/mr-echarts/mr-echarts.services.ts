@@ -1,14 +1,13 @@
 import * as mu from 'mzmu';
 import * as _ from 'lodash';
 import {defDataModel, defOptions, defSubType, subSetting} from './setting';
-import _colors from '../assets/theme.customed.js';
+import * as _colors from '../assets/theme.customed.js';
 // CHART_NAME 决定 legend
 const CHART_NAME = 'name';
 // CHART_X 决定 x 轴
 const CHART_X = 'x';
 // CHART_VALUE 决定y轴数据
 // const CHART_VALUE = 'value';
-
 
 export default {
     _theme: 'customed',
