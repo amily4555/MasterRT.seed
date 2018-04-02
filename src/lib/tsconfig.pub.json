@@ -7,7 +7,7 @@
         "removeComments": true,
         "declaration": false,
         "sourceMap": true,
-        "jsx": "preserve",
+        "jsx": "react",
         "listFiles": false,
         "moduleResolution": "node",
         "emitDecoratorMetadata": true,
