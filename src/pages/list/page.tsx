@@ -2,8 +2,8 @@ import React from 'react';
 import router from 'umi/router';
 import styles from './page.less';
 // import {MrEcharts} from '../../../pub/mr-echarts/mr-echarts.component';
-// import {MrEcharts} from 'masterrt';
-import {MrEcharts} from '../../lib/mr-echarts/mr-echarts.component';
+import {MrEcharts} from 'masterrt';
+// import {MrEcharts} from '../../lib/mr-echarts/mr-echarts.component';
 // import {MrEcharts} from 'masterrt/mr-echarts/echarts.component';
 
 console.log(':::::::::');
