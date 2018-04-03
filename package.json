@@ -8,7 +8,8 @@
         "clean": "rm -rf ./pub",
         "compile": "tsc -p ./pub/tsconfig.pub.json",
         "tsd": "bash ./build.sh",
-        "pub": "bash ./pub.sh"
+        "pub": "bash ./pub.sh",
+        "doc": "typedoc --out ./doc"
     },
     "private": false,
     "author": [
@@ -34,11 +35,12 @@
         "umi-plugin-dva": "^0.3.4"
     },
     "devDependencies": {
-        "@types/node": "^9.4.7",
-        "@types/react": "^16.0.40",
         "@types/echarts": "0.0.12",
         "@types/lodash": "^4.14.106",
+        "@types/node": "^9.4.7",
+        "@types/react": "^16.0.40",
         "babel-plugin-module-resolver": "^3.1.0",
-        "ts-jest-babel-7": "^22.0.7"
+        "ts-jest-babel-7": "^22.0.7",
+        "typedoc": "^0.11.1"
     }
 }

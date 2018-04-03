@@ -1,6 +1,9 @@
 import * as _ from 'lodash';
 import * as mu from 'mzmu';
 
+/**
+ * 各种chart基础option配置
+ */
 export const defOptions = {
     pie: {
         legend: {},
@@ -92,7 +95,10 @@ export const defOptions = {
             max: 200,
             left: 'left',
             top: 'bottom',
-            text: ['高', '低'],
+            text: [
+                '高',
+                '低'
+            ],
             calculable: false,
 
         },
@@ -111,18 +117,30 @@ export const defOptions = {
     }
 };
 
+/**
+ * 各类型的chart, 默认数据处理机制
+ * @type {{pie: string; wordCloud: string}}
+ */
 export const defDataModel = {
     pie: 'single',
     wordCloud: 'single'
     // scatter: 'single'
 };
 
+/**
+ * 默认各类型的chart
+ * @type {{bar: string; gauge: string; treemap: string}}
+ */
 export const defSubType = {
     bar: 'bar::stack',
     gauge: 'gauge::half',
     treemap: 'treemap::simple'
 };
 
+/**
+ * 各种配置规则
+ * @param _colors
+ */
 export function subSetting(_colors) {
     return {
         // 不显示xy轴
@@ -220,19 +238,28 @@ export function subSetting(_colors) {
             }
         },
         pie: {
-            '$$series[*].center': ['50%', '55%']
+            '$$series[*].center': [
+                '50%',
+                '55%'
+            ]
         },
         // 饼图 => 环形
         'pie::ring': [
             {
-                '$$series[*].radius': ['50%', '75%']
+                '$$series[*].radius': [
+                    '50%',
+                    '75%'
+                ]
             }
         ],
 
         'pie::rose': [
             {'$$series[*].roseType': 'area'},
             {
-                '$$series[*].radius': ['10%', '75%']
+                '$$series[*].radius': [
+                    '10%',
+                    '75%'
+                ]
             },
             {'$$series[*].label.normal.show': true}
         ],
@@ -240,7 +267,10 @@ export function subSetting(_colors) {
         'pie::ring::rose': [
             {'series[0].roseType': 'area'},
             {
-                'series[0].radius': ['10%', '65%']
+                'series[0].radius': [
+                    '10%',
+                    '65%'
+                ]
             },
             {'series[0].label.normal.show': false},
             // 'series[0].itemStyle.color': _colors[0],
@@ -249,10 +279,16 @@ export function subSetting(_colors) {
             {'series[1].hoverAnimation': false},
             {'series[1].zlevel': -2},
             {
-                'series[1].radius': ['66%', '75%']
+                'series[1].radius': [
+                    '66%',
+                    '75%'
+                ]
             },
             {
-                'series[1].center': ['50%', '55%']
+                'series[1].center': [
+                    '50%',
+                    '55%'
+                ]
             },
             // 'series[1].itemStyle.color': '#CFD7D9'},
             {'series[1].itemStyle.borderWidth': 1},
@@ -270,8 +306,11 @@ export function subSetting(_colors) {
         ],
 
         map: {
-            'inRange.color': ['#ffffff', _.get( _colors, 'base[0]')],
-            'geo.itemStyle.emphasis.areaColor': _.get( _colors, 'base[1]')
+            'inRange.color': [
+                '#ffffff',
+                _.get(_colors, 'base[0]')
+            ],
+            'geo.itemStyle.emphasis.areaColor': _.get(_colors, 'base[1]')
         },
 
         // 地图 => 中国地图
@@ -353,8 +392,14 @@ export function subSetting(_colors) {
         },
         wordCloud: {
             '$$series[*].shape': 'circle',
-            '$$series[*].sizeRange': [14, 42],
-            '$$series[*].rotationRange': [-45, 90]
+            '$$series[*].sizeRange': [
+                14,
+                42
+            ],
+            '$$series[*].rotationRange': [
+                -45,
+                90
+            ]
         },
         'wordCloud::random': {
             '$$series[*].textStyle.normal.color': () => {

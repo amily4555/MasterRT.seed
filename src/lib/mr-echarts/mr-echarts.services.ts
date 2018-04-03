@@ -9,6 +9,9 @@ const CHART_X = 'x';
 // CHART_VALUE 决定y轴数据
 // const CHART_VALUE = 'value';
 
+/**
+ * MrEcharts Services
+ */
 export default {
     _theme: 'customed',
     _colors: _colors,
