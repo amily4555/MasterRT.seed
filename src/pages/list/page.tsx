@@ -1,7 +1,7 @@
 import React from 'react';
 import router from 'umi/router';
 import styles from './page.less';
-import {MrEcharts} from '../../lib';
+import {MrDownload, MrEcharts} from '../../lib';
 // import {MrEcharts} from 'masterrt';
 
 console.log(':::::::::');
@@ -507,6 +507,54 @@ export default () => {
     return (
         <div className={styles.normal}>
             <h2>List Page</h2>
+
+            --
+            <div>
+                <MrDownload url="http://localhost:8000/assets/b.txt">我要下载</MrDownload>
+                http://localhost:8000/assets/b.txt
+            </div>
+
+            <div>
+                <MrDownload url="http://localhost:8000/assets/baidu.xlsx">我要下载</MrDownload>
+                http://localhost:8000/assets/baidu.xlsx
+            </div>
+
+            <div>
+                <MrDownload url="http://localhost:8000/assets/bbs.svg">我要下载</MrDownload>
+                http://localhost:8000/assets/bbs.svg
+            </div>
+
+            <div>
+                <MrDownload url="http://localhost:8000/assets/bht.pdf">我要下载</MrDownload>
+                http://localhost:8000/assets/bht.pdf
+            </div>
+
+            <div>
+                <MrDownload url="http://localhost:8000/assets/gbk.rar">我要下载</MrDownload>
+                http://localhost:8000/assets/gbk.rar
+            </div>
+
+            <div>
+                <MrDownload url="http://localhost:8000/assets/icon.zip">我要下载</MrDownload>
+                http://localhost:8000/assets/icon.zip
+            </div>
+
+            <div>
+                <MrDownload url="http://localhost:8000/assets/olay.csv">我要下载</MrDownload>
+                http://localhost:8000/assets/olay.csv
+            </div>
+
+            <div>
+                <MrDownload url="http://localhost:8000/assets/王丹.docx">我要下载</MrDownload>
+                http://localhost:8000/assets/王丹.docx
+            </div>
+
+            <div>
+                <MrDownload url="http://localhost:8000/assets/林政.jpg">我要下载</MrDownload>
+                http://localhost:8000/assets/林政.jpg
+            </div>
+            --
+
             <div
                 onClick={() => {
                     router.goBack();

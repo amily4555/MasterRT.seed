@@ -9,7 +9,7 @@
         "compile": "tsc -p ./pub/tsconfig.pub.json",
         "tsd": "bash ./build.sh",
         "pub": "bash ./pub.sh",
-        "doc": "typedoc --out ./doc"
+        "doc": "typedoc --out ./docs"
     },
     "private": false,
     "author": [
@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "antd": "^3.3.1",
+        "downloadjs": "^1.4.7",
         "dva": "^2.1.0",
         "echarts": "^4.0.4",
         "echarts-wordcloud": "^1.1.3",
