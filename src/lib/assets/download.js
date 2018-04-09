@@ -88,7 +88,6 @@ var define = window.define;
             payload :
             new myBlob([payload], {type: mimeType}) ;
 
-
         function dataUrlToBlob(strUrl) {
             var parts= strUrl.split(/[:;,]/),
                 type= parts[1],

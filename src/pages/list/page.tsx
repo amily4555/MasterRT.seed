@@ -1,7 +1,8 @@
 import React from 'react';
 import router from 'umi/router';
 import styles from './page.less';
-import {MrDownload, MrEcharts} from '../../lib';
+import {MrDownload, MrEcharts, MrRequest, MrResource} from '../../lib';
+import Button from 'antd/lib/button/button';
 // import {MrEcharts} from 'masterrt';
 
 console.log(':::::::::');
@@ -504,11 +505,33 @@ export default () => {
         {brand: 'Braun', date: '2018-01-02', name: 'Braun', value: 130, x: '2018-01-02'}
     ];
 
+    let R = MrResource.pool('./assets/{file}');
+
+    let testAjax = () => {
+
+        // MrRequest('./assets/baidu.xlsx', {
+        //     headers: {
+        //         responseType: 'blob'
+        //     }
+        // });
+
+        R.download({
+            file: 'baidu.xlsx',
+            downloadName: '江山如此.xlsx'
+        }, {
+            headers: {
+                responseType: 'blob'
+            }
+        });
+
+
+        return 'aaa';
+    };
+
     return (
         <div className={styles.normal}>
             <h2>List Page</h2>
 
-            --
             <div>
                 <MrDownload url="http://localhost:8000/assets/b.txt">我要下载</MrDownload>
                 http://localhost:8000/assets/b.txt
@@ -553,7 +576,10 @@ export default () => {
                 <MrDownload url="http://localhost:8000/assets/林政.jpg">我要下载</MrDownload>
                 http://localhost:8000/assets/林政.jpg
             </div>
-            --
+
+
+            <Button onClick={testAjax.bind(this)}>Ajax</Button>
+
 
             <div
                 onClick={() => {

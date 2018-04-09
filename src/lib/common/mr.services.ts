@@ -1,3 +1,6 @@
+import * as download from '../assets/download';
+
+
 /**
  * 通用方法
  */
@@ -14,6 +17,18 @@ class MrServices {
     isChinese(str: string) {
         // console.debug(str, this.REG_CHINESE.test(str));
         return this.REG_CHINESE.test(str);
+    }
+
+    /**
+     * 下载文件
+     * @param arg
+     */
+    download(...arg) {
+        download(...arg);
+    }
+
+    requestDownload() {
+
     }
 
 }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as download from '../assets/download';
 import MrServices from '../common/mr.services';
 import * as mu from 'mzmu';
 
@@ -20,16 +19,15 @@ export interface MrDownloadProps {
  * 支持文本
  * 支持图片
  */
-
 export class MrDownload extends React.Component<MrDownloadProps, {}> {
 
     download(eventName: string) {
         const {url, filename, content, event= 'click', mime} = this.props;
         if(eventName === event){
             if(url){
-                download(url);
+                MrServices.download(url);
             } else {
-                download(content, filename, mime);
+                MrServices.download(content, filename, mime);
             }
         }
     }
