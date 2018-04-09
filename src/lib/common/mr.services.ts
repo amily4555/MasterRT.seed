@@ -27,8 +27,33 @@ class MrServices {
         download(...arg);
     }
 
-    requestDownload() {
+    /**
+     * 设置HTTP headers
+     * @param headers
+     */
 
+    _headers: any;
+
+    setHeaders(headers: any) {
+        this._headers = headers;
+    }
+
+    getHeaders() {
+        return this._headers;
+    }
+
+    /**
+     * 全局文件配置信息
+     */
+
+    _rules: any;
+
+    setRules(rules: any) {
+        this._rules = rules;
+    }
+
+    getRules() {
+        return this._rules;
     }
 
 }

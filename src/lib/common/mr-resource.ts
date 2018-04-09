@@ -4,6 +4,8 @@ import MrServices from './mr.services';
 
 class MrResource {
 
+
+
     /**
      * URL to REST_URL
      * @param url
@@ -53,8 +55,9 @@ class MrResource {
     get(url: string, search?: any, options?: any) {
         const rest = this.restful(url, search);
         let fullUrl = rest.fullUrl;
+
         options = mu.extend(true, {
-            method: 'get'
+            method: 'get',
         }, options || {});
 
         return MrRequest(fullUrl, options);
@@ -79,6 +82,7 @@ class MrResource {
         }
 
         const rest = this.restful(url, search, false);
+        let headers: any = MrServices.getHeaders();
         // const restdata = this.restful(rest.url, data, true);
 
         options = mu.extend(true, {

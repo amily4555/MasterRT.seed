@@ -1,7 +1,7 @@
 import React from 'react';
 import router from 'umi/router';
 import styles from './page.less';
-import {MrDownload, MrEcharts, MrRequest, MrResource} from '../../lib';
+import {MrDownload, MrEcharts, MrRequest, MrResource, MrIf} from '../../lib';
 import Button from 'antd/lib/button/button';
 // import {MrEcharts} from 'masterrt';
 
@@ -530,7 +530,11 @@ export default () => {
 
     return (
         <div className={styles.normal}>
-            <h2>List Page</h2>
+
+
+            <MrIf condition={true}>
+                <h2>List Page</h2>
+            </MrIf>
 
             <div>
                 <MrDownload url="http://localhost:8000/assets/b.txt">我要下载</MrDownload>
@@ -589,31 +593,37 @@ export default () => {
                 Back
             </div>
 
-            <div style={{height: 300}}>
-                <MrEcharts
-                    // 数据源
-                    data={dataPie}
-                    // ? sourceType // 数据源类型 => dataSet, dataSource
-                    dataType={'dataSource'}
-                    // ? dataModel // 数据处理类型 => group, single
-                    dataModel={''}
-                    // chartTypes // 图表类型以及衍生类型， // 如 pie::ring(饼图::环形), pie::rose(饼图::南丁格尔) // 如 bar::stack(柱形堆叠图), line:area(线x形::面积图)
-                    chartTypes={'pie::ring::rose'}
-                    // ? setting // 额外配置项 // 可使用options路径直接配置 // {'series[0].center': [0, 75%]}
-                    setting={[{'legend.show': true}, {'legend.orient': 'vertical'}, {'legend.right': '20%'}]}
-                    // ? options 直接调用 // 图表的options配置，直接获得图表
-                    options={null}
-                    // ? theme // 图表的主体配色
-                    theme={''}
-                    // ? renderType, // 图表绘图类型 'svg', 'canvas'
-                    renderType={'svg'}
-                />
-            </div>
+            <MrIf rules={['list.rose.ring', 'list.word.cloud']}>
+                <MrIf rules={'list.rose.ring'}>
+                    <div style={{height: 300}}>
+                        <MrEcharts
+                            // 数据源
+                            data={dataPie}
+                            // ? sourceType // 数据源类型 => dataSet, dataSource
+                            dataType={'dataSource'}
+                            // ? dataModel // 数据处理类型 => group, single
+                            dataModel={''}
+                            // chartTypes // 图表类型以及衍生类型， // 如 pie::ring(饼图::环形), pie::rose(饼图::南丁格尔) // 如 bar::stack(柱形堆叠图), line:area(线x形::面积图)
+                            chartTypes={'pie::ring::rose'}
+                            // ? setting // 额外配置项 // 可使用options路径直接配置 // {'series[0].center': [0, 75%]}
+                            setting={[{'legend.show': true}, {'legend.orient': 'vertical'}, {'legend.right': '20%'}]}
+                            // ? options 直接调用 // 图表的options配置，直接获得图表
+                            options={null}
+                            // ? theme // 图表的主体配色
+                            theme={''}
+                            // ? renderType, // 图表绘图类型 'svg', 'canvas'
+                            renderType={'svg'}
+                        />
+                    </div>
+                </MrIf>
 
-            <section style={{height: 300}}>
-                <h4>wordCloud</h4>
-                <MrEcharts data={dataWordCloud} chartTypes={'wordCloud::random'} />
-            </section>
+                <MrIf rules={'list.word.cloud'}>
+                    <section style={{height: 300}}>
+                        <h4>wordCloud</h4>
+                        <MrEcharts data={dataWordCloud} chartTypes={'wordCloud::random'} />
+                    </section>
+                </MrIf>
+            </MrIf>
 
             <section style={{height: 300}}>
                 <h4>bar::stack</h4>
