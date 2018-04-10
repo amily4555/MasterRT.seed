@@ -148,7 +148,7 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
     componentWillReceiveProps(props: MrEchartsProps) {
         // 使用JSON.stringify(props) 来判断两次 props 是否一致
         // 避免 react 本身机制问题，每次setState 重新渲染页面
-        if(JSON.stringify(props) === JSON.stringify(this.props)){
+        if(JSON.stringify(props) !== JSON.stringify(this.props)){
             this.drawCharts(props);
         }
     }
