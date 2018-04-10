@@ -171,7 +171,8 @@ class MrResource {
                 });
             },
 
-            mrdown(search: any, data?: any, options?: any) {
+            mrdown(search: any = {}, data?: any, options?: any) {
+                search['directDownload'] = true;
                 const args: any = Array.from(arguments);
                 args.unshift(url);
                 vm.post.apply(vm, args).then((rst) => {
