@@ -11,5 +11,6 @@ export default {
     alias: {
         components: resolve(__dirname, './components')
     },
-    publicPath: '.'
+    publicPath: '.',
+    disableCSSModules: true
 };

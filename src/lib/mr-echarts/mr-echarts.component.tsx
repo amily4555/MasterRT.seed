@@ -1,4 +1,3 @@
-declare var require: any;
 import * as React from 'react';
 import * as echarts from 'echarts';
 import * as _ from 'lodash';
@@ -7,7 +6,8 @@ import 'echarts-wordcloud';
 import '../assets/china.js';
 import '../assets/theme.customed.js';
 import _sevr from './mr-echarts.services';
-const styles = require('../assets/echarts.component.less');
+declare var require: any;
+require('../assets/mr-echarts.component.less');
 
 export interface MrEchartsProps {
     data?: any[];
@@ -18,6 +18,7 @@ export interface MrEchartsProps {
     options?: any;
     theme?: string;
     renderType?: string;
+    style?: any;
 }
 
 export class MrEcharts extends React.Component<MrEchartsProps, {}> {
@@ -156,6 +157,7 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
     componentDidMount() {
         this.drawCharts(this.props);
         window.addEventListener('resize', this.windowResize.bind(this));
+        this._chartRef.addEventListener('resize', this.windowResize.bind(this));
     }
 
     componentWillUnmount() {
@@ -163,6 +165,6 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
     }
 
     render() {
-        return <div className={styles['mr-echarts'] || 'mr-echarts'} ref={(div) => (this._chartRef = div)} />;
+        return <div className={'mr-echarts'} style={this.props.style} ref={(div) => (this._chartRef = div)} />;
     }
 }

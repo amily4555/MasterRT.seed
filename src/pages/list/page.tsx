@@ -1,7 +1,7 @@
 import React from 'react';
 import router from 'umi/router';
 import styles from './page.less';
-import {MrDownload, MrEcharts, MrRequest, MrResource, MrIf} from '../../lib';
+import {MrDownload, MrEcharts, MrRequest, MrResource, MrIf, MrEchartsPanel, MrPanel} from '../../lib';
 import Button from 'antd/lib/button/button';
 // import {MrEcharts} from 'masterrt';
 
@@ -625,13 +625,28 @@ export default () => {
                 </MrIf>
             </MrIf>
 
+            <h4>bar::stack</h4>
             <section style={{height: 300}}>
-                <h4>bar::stack</h4>
                 <MrEcharts
                     data={ladder} // no use stack // {bar::stack=false}
                     chartTypes={'bar::stack::ladder'}
                 />
             </section>
+
+            <MrPanel title="静夜思::李白">
+                床前明月光<br />
+                疑似地上霜<br />
+                举头望明月<br />
+                低头思故乡<br />
+            </MrPanel>
+
+            <MrEchartsPanel
+                style={{height: 300}}
+                title="MrEcharts Panel::bar-stack"
+                data={ladder} // no use stack // {bar::stack=false}
+                chartTypes={'bar::stack'}
+            />
+
         </div>
     );
 };

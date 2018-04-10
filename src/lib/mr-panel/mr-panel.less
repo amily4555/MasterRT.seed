@@ -1,0 +1,36 @@
+.ms-panel {
+    display: table;
+    width: 100%;
+    height: 100%;
+    
+    > header {
+        display: table-row;
+        height: 40px;
+    
+        + section {
+            display: table-row;
+        }
+    }
+    
+    .ms-panel-header {
+        padding: 8px;
+        vertical-align: middle;
+        
+        .ms-panel-title {
+            font-size: 16px;
+        }
+    
+        .ms-panel-subTitle {
+            margin-left: 4px;
+            opacity: .6;
+            font-size: 14px;
+            font-style: normal;
+        }
+    }
+    
+    .ms-panel-body {
+        padding: 8px;
+        height: 100%;
+    }
+    
+}

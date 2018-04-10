@@ -1,5 +1,7 @@
 import * as download from '../assets/download';
-
+import * as mu from 'mzmu';
+declare var require: any;
+const _commonStyles = require('../assets/common.less');
 
 /**
  * 通用方法
@@ -19,11 +21,15 @@ class MrServices {
         return this.REG_CHINESE.test(str);
     }
 
+    cls(...keys: string[]) {
+        return keys.join(' ');
+    }
+
     /**
      * 下载文件
      * @param arg
      */
-    download(...arg) {
+    download(...arg: any[]) {
         download(...arg);
     }
 
