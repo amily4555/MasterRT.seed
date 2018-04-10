@@ -9,6 +9,11 @@ import _sevr from './mr-echarts.services';
 declare var require: any;
 require('../assets/mr-echarts.component.less');
 
+// mark
+// 监听dom变化
+// element-resize-detector
+// const erd = elementResizeDetectorMaker({strategy: "scroll"});
+
 export interface MrEchartsProps {
     data?: any[];
     dataType?: string;
@@ -22,9 +27,10 @@ export interface MrEchartsProps {
 }
 
 export class MrEcharts extends React.Component<MrEchartsProps, {}> {
-
     _chart: any;
     _chartRef: any;
+    _width: number;
+    _height: number;
 
     /**
      * 绘制Echarts图表
@@ -142,22 +148,37 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
         }
     }
 
-    windowResize() {
+    windowResize = mu.bind(() => {
         this._chart.resize();
-    }
+    }, this);
 
     componentWillReceiveProps(props: MrEchartsProps) {
         // 使用JSON.stringify(props) 来判断两次 props 是否一致
         // 避免 react 本身机制问题，每次setState 重新渲染页面
-        if(JSON.stringify(props) !== JSON.stringify(this.props)){
+        if (JSON.stringify(props) !== JSON.stringify(this.props)) {
             this.drawCharts(props);
         }
     }
 
     componentDidMount() {
         this.drawCharts(this.props);
-        window.addEventListener('resize', this.windowResize.bind(this));
-        this._chartRef.addEventListener('resize', this.windowResize.bind(this));
+        window.addEventListener('resize', this.windowResize);
+    }
+
+    // componentWillUpdate() {
+    //     this._width = this._chartRef.offsetWidth;
+    //     this._height = this._chartRef.offsetHeight;
+    // }
+
+    componentDidUpdate() {
+        this.windowResize();
+
+        // // 监测 DOM 的宽高变化
+        // let {offsetWidth, offsetHeight} = this._chartRef;
+        //
+        // if(this._width !== offsetWidth || this._height !== offsetHeight) {
+        //     this.windowResize();
+        // }
     }
 
     componentWillUnmount() {
