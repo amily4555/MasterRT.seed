@@ -24,6 +24,7 @@ export interface MrEchartsProps {
     theme?: string;
     renderType?: string;
     style?: any;
+    result?: any;
 }
 
 export class MrEcharts extends React.Component<MrEchartsProps, {}> {
@@ -39,6 +40,7 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
     drawCharts = _.debounce((props: any) => {
         let {data, dataType, dataModel, chartTypes, setting = {}} = props;
         let {options, renderType, theme} = props;
+        let {result} = props;
         let _dom = this._chartRef;
         // _dom 不存在时不渲染
         if (!_dom) return;
@@ -81,6 +83,9 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
         this._chart.resize();
 
         this.registerEvents(props, options, rst);
+
+        // call back info
+        result && result(options, rst);
     }, 300);
 
     /**
@@ -153,9 +158,9 @@ export class MrEcharts extends React.Component<MrEchartsProps, {}> {
     }, this);
 
     componentWillReceiveProps(props: MrEchartsProps) {
-        // 使用JSON.stringify(props) 来判断两次 props 是否一致
+        // 判断两次 props 是否一致
         // 避免 react 本身机制问题，每次setState 重新渲染页面
-        if (JSON.stringify(props) !== JSON.stringify(this.props)) {
+        if (_.isEqual(props, this.props)) {
             this.drawCharts(props);
         }
     }

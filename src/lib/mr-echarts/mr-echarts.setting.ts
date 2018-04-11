@@ -16,7 +16,8 @@ export const defOptions = {
         grid: {
             left: 20,
             right: 20,
-            bottom: 20
+            bottom: 20,
+            containLabel: true
         },
         legend: {},
         tooltip: {},
@@ -30,7 +31,8 @@ export const defOptions = {
         grid: {
             left: 50,
             right: 20,
-            bottom: 20
+            bottom: 20,
+            containLabel: true
         },
         legend: {},
         tooltip: {},

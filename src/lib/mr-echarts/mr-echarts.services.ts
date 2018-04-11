@@ -19,6 +19,16 @@ export default {
     CHART_RENDER_TYPE: 'canvas',
 
     /**
+     * 序列化对象
+     * @param setting
+     */
+    serialize(setting: any) {
+        return mu.type(setting, 'array') ? setting : mu.map(setting, (v, k) => {
+            return {[k]: v};
+        }, []);
+    },
+
+    /**
      * 重写 _.set
      * 支持按通配符 * 全组遍历
      * @param obj
@@ -27,6 +37,31 @@ export default {
      * @return {*}
      */
     muSet(obj, key, value) {
+
+        let fn = {
+            xyExchange: (options: any, isExhange) => {
+                let _opts = _.clone(options);
+                options['yAxis'] = _opts['xAxis'];
+                options['xAxis'] = _opts['yAxis'];
+                // _.set(options, 'grid.left', 100);
+                return options;
+            },
+
+            xAxisShowAll: (options, value) => {
+                _.set(options, 'xAxis[0].axisLabel.interval', 0);
+                _.set(options, 'xAxis[0].axisLabel.rotate', 20);
+                // _.set(options, 'grid.bottom', 50);
+                return options;
+            },
+
+            legendShow: (options) => {
+                let _show = !mu.ifnvl(_.get(options, 'legend.show'), true);
+                _.set(options, 'legend.show', _show);
+                _.set(options, 'grid.top', _show ? 60 : 10);
+                return options;
+            }
+        };
+
         let _obj = mu.clone(obj);
         let _fn;
 
@@ -55,6 +90,9 @@ export default {
                     _.set(obj, `${p1}[${idx}]`, value);
                 }
             });
+        } else if (/^@@/.test(key)) {
+            let fname = key.replace(/^@@/, '');
+            fn[fname] && fn[fname](obj, value);
         } else {
             value = _fn ? _fn(obj) : value;
             _.set(obj, key, value);
@@ -87,27 +125,20 @@ export default {
     transform(data, dataType = 'dataSource', dataModel = 'group', setting = {}) {
         let $data = mu.clone(data);
 
-        let _data =
-            dataModel === 'single'
-                ? mu.map(
-                      data,
-                      (o) => {
-                          return {
-                              __key__: o[CHART_NAME],
-                              __val__: o
-                          };
-                      },
-                      {}
-                  )
-                : mu.groupArray(data, CHART_NAME);
+        let _data = mu.run(dataModel === 'single', () => {
+            return mu.map(data, (o) => {
+                return {
+                    __key__: o[CHART_NAME],
+                    __val__: o
+                };
+            }, {});
+        }, () => {
+            return mu.groupArray(data, CHART_NAME);
+        });
 
-        let _legend = mu.map(
-            _data,
-            (o, name) => {
-                return {name};
-            },
-            []
-        );
+        let _legend = mu.map(_data, (o, name) => {
+            return {name};
+        }, []);
 
         let _series = mu.map(
             _legend,
@@ -121,19 +152,53 @@ export default {
             dataModel === 'single'
                 ? null
                 : mu.map(
-                      mu.groupArray(data, CHART_X),
-                      (o, name) => {
-                          return name;
-                      },
-                      []
-                  );
+                mu.groupArray(data, CHART_X),
+                (o, name) => {
+                    return name;
+                },
+                []
+                );
+
+        let _dataView = this.getDataView(_series, _legend, _x);
+
+        console.debug(_dataView);
 
         return {
             $data,
             _legend,
             _series,
-            _x
+            _x,
+            _dataView
         };
+    },
+
+    getDataView(series, legend = [], x = []) {
+
+        let _series = mu.clone(series);
+        let _legend = mu.clone(legend);
+        let _x = mu.clone(x);
+
+
+        if(mu.type(_series[0], 'object')){
+            _series = [_series];
+        }
+
+        let _dataView = mu.map(_series, (arr, inx) => {
+            let legend = _legend[inx] || {};
+            let legendName = legend.name || legend;
+            arr.unshift(legendName);
+            arr = mu.map(arr, (o) => o.value || o);
+            return arr;
+        });
+
+        if(mu.isEmpty(_x)) {
+            _x = mu.map(_dataView[0].length - 1, () => void 0, []);
+        }
+
+        _x.unshift('');
+        _dataView.unshift(_x);
+
+        return _dataView;
     },
 
     /**
@@ -177,7 +242,10 @@ export default {
                             let min_ = parseFloat(_.get(_maxmin[name], 'min.value'));
 
                             if (max_ < min_) {
-                                let tmp = [max_, min_];
+                                let tmp = [
+                                    max_,
+                                    min_
+                                ];
                                 max_ = tmp[1];
                                 min_ = tmp[0];
                             }
@@ -282,7 +350,10 @@ export default {
                             (o, name) => {
                                 return {
                                     name: _.get(o, '[0].name'),
-                                    value: [o[0].value, o[0].x]
+                                    value: [
+                                        o[0].value,
+                                        o[0].x
+                                    ]
                                 };
                             },
                             []
@@ -358,7 +429,7 @@ export default {
      * @param setting
      */
     flatDataSetting(setting) {
-        if(mu.type(setting, 'array')){
+        if (mu.type(setting, 'array')) {
             let _setting = {};
             mu.each(setting, (o) => {
                 _setting = mu.extend(_setting, o);
@@ -387,6 +458,17 @@ export default {
         //
         //         break;
         // }
+
+        // 根据 legend.show 调节 grid 关联高度
+        mu.run(() => {
+            let _show = mu.ifnvl(_.get(options, 'legend.show'), true);
+            if (!_show) {
+                // todo 暂时不考虑其他方向
+                _.set(options, 'grid.top', 10);
+            } else {
+                // todo 计算legend的高度
+            }
+        });
 
         return options;
     },
@@ -417,8 +499,10 @@ export default {
         // 数据转换结果
         let _rst = this.transform(data, dataType, _dataModel);
 
+        // 根据数据设置series, 得到初始options
         _opts = this.injectOptions(_opts, _rst, _chartType, _dataModel, _setting);
 
+        // 根据某些规则，重新配置options
         _opts = this.reOptions(_opts, _setting, _chartType, _dataModel);
 
         return {
