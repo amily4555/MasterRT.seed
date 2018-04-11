@@ -22,12 +22,12 @@ export class MrPanel extends React.Component<MrPanelProps, {}> {
 
         return (<article style={style} className={_sevr.cls('ms-panel', ...className.split(' '))}>
             <header>
-                <div className={_sevr.cls('ms-panel-header')}>
-                    <span className={_sevr.cls('ms-panel-title')}>{_title}</span>
+                <div className={'ms-panel-header'}>
+                    <span className={'ms-panel-title'}>{_title}</span>
                     <MrIf condition={_subTitle}>
-                        <small className={_sevr.cls('ms-panel-subTitle')}>{_subTitle}</small>
+                        <small className={'ms-panel-subTitle'}>{_subTitle}</small>
                     </MrIf>
-                    <div className={_sevr.cls('ms-panel-headerExtra')}>{extra}</div>
+                    <div className={'ms-panel-headerExtra'}>{extra}</div>
                 </div>
             </header>
 

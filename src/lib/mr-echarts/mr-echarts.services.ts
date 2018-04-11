@@ -77,6 +77,8 @@ export default {
             _fn = value;
         }
 
+        console.debug(key);
+
         if (/\$\$/.test(key)) {
             let _path = key.replace(/\$\$/, '');
             let [p1, p2] = _path.split('[*]');
@@ -92,6 +94,7 @@ export default {
             });
         } else if (/^@@/.test(key)) {
             let fname = key.replace(/^@@/, '');
+            console.debug(fname);
             fn[fname] && fn[fname](obj, value);
         } else {
             value = _fn ? _fn(obj) : value;
@@ -160,8 +163,6 @@ export default {
                 );
 
         let _dataView = this.getDataView(_series, _legend, _x);
-
-        console.debug(_dataView);
 
         return {
             $data,

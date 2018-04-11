@@ -2,6 +2,7 @@ import * as React from 'react';
 import {MrEcharts, MrEchartsProps} from './mr-echarts.component';
 import {MrPanel} from '../';
 import _mrEchartServices from './mr-echarts.services';
+import _mrServices from '../common/mr.services';
 import * as _ from 'lodash';
 import * as mu from 'mzmu';
 import {MrEchartsDataView} from './mr-echarts-dataView.component';
@@ -11,6 +12,7 @@ require('../assets/mr-echarts-panel.less');
 interface MrEchartsPanelProps extends MrEchartsProps {
     style?: any;
     title?: string;
+    downloadName?: string;
 }
 
 export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
@@ -25,24 +27,28 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
     };
 
     // 缓存dataView数据
-    _dataView: any;
+    _dataView: any = [];
 
     tools() {
         return (
             <div>
-                <span onClick={this.fullScreen.bind(this)}>Full</span>
-                <span onClick={this.toolSetFn.bind(this, 'xyExchange')}> - xyExchange</span>
-                <span onClick={this.toolSetFn.bind(this, 'xAxisShowAll')}> - xAxisShowAll</span>
-                <span onClick={this.toolSetFn.bind(this, 'legendShow')}> - legendShow</span>
+                <span onClick={this.download.bind(this)}> - download</span>
                 <span onClick={this.dataView.bind(this)}> - dataView</span>
+                <span onClick={this.toolSetFn.bind(this, 'xyExchange', true)}> - xyExchange</span>
+                <span onClick={this.toolSetFn.bind(this, 'xAxisShowAll', true)}> - xAxisShowAll</span>
+                <span onClick={this.toolSetFn.bind(this, 'legendShow', true)}> - legendShow</span>
+                <span onClick={this.reload.bind(this)}> - reload</span>
+                <span onClick={this.fullScreen.bind(this)}> - Full</span>
             </div>
         );
     }
 
     toolSetFn(key: string, value?: any) {
+
         let status = this.state[key];
         let fnName = `@@${key}`;
         let {setting} = this.state;
+
         status = !status;
 
         if(status){
@@ -52,7 +58,7 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
                 return _.keys(o)[0] === fnName;
             });
         }
-        setting = _.clone(setting);
+
         this.setState({[key]: status, setting});
     };
 
@@ -60,7 +66,7 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
     fullScreen() {
         this.setState({
             fullScreen: !this.state.fullScreen
-        })
+        });
     }
 
     // 查看DataView
@@ -70,6 +76,21 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
         })
     }
 
+    // download 下载数据
+    download() {
+        let {title, downloadName} = this.props;
+        downloadName = downloadName || `${title}_${+new Date()}`;
+        _mrServices.download(this._dataView.join('\n'), downloadName + '.csv');
+    }
+
+    // 刷新数据
+    reload() {
+        let {setting} = this.props;
+        setting = _mrEchartServices.serialize(setting);
+        this.setState({setting, dataView: false});
+    }
+
+    // 获得 echart callback data
     getResult(options, rst) {
         this._dataView = _.get(rst, 'data._dataView');
     }
@@ -79,8 +100,8 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
         const {title, style} = this.props;
         const {data, dataType, dataModel, chartTypes} = this.props;
         const {options, renderType, theme} = this.props;
-        const {fullScreen, dataView, setting} = this.state;
-
+        let {fullScreen, dataView, setting} = this.state;
+        setting = mu.clone(setting);
         const echartsProps = {
             data,
             dataType,
@@ -94,8 +115,7 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
 
         return (<MrPanel title={title} extra={this.tools()} style={style}
                          className={[fullScreen ? 'ms-fullScreen' : '', 'ms-echarts-panel'].join(' ')}>
-
-            { dataView ? <div><MrEchartsDataView data={this._dataView} /></div> : <MrEcharts {...echartsProps} result={this.getResult.bind(this)} /> }
+            { dataView ? <div><MrEchartsDataView data={this._dataView} /></div> : <MrEcharts {...echartsProps} result={this.getResult.bind(this)} />}
         </MrPanel>);
     }
 
