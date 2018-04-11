@@ -39,6 +39,8 @@ export default {
     muSet(obj, key, value) {
 
         let fn = {
+
+            // xy轴互换
             xyExchange: (options: any, isExhange) => {
                 let _opts = _.clone(options);
                 options['yAxis'] = _opts['xAxis'];
@@ -47,6 +49,19 @@ export default {
                 return options;
             },
 
+            // 线图和柱形图互换
+            lineBarExchange: (options) => {
+                let series = options.series;
+                mu.each(series, (o) => {
+                    if(o.type === 'line') {
+                        o.type = 'bar';
+                    } else if(o.type === 'bar') {
+                        o.type = 'line';
+                    }
+                });
+            },
+
+            // 显示x轴所有值
             xAxisShowAll: (options, value) => {
                 _.set(options, 'xAxis[0].axisLabel.interval', 0);
                 _.set(options, 'xAxis[0].axisLabel.rotate', 20);
@@ -54,6 +69,7 @@ export default {
                 return options;
             },
 
+            // 是否显示 legend
             legendShow: (options) => {
                 let _show = !mu.ifnvl(_.get(options, 'legend.show'), true);
                 _.set(options, 'legend.show', _show);
@@ -77,8 +93,7 @@ export default {
             _fn = value;
         }
 
-        console.debug(key);
-
+        // 各种方法处理
         if (/\$\$/.test(key)) {
             let _path = key.replace(/\$\$/, '');
             let [p1, p2] = _path.split('[*]');
@@ -94,7 +109,6 @@ export default {
             });
         } else if (/^@@/.test(key)) {
             let fname = key.replace(/^@@/, '');
-            console.debug(fname);
             fn[fname] && fn[fname](obj, value);
         } else {
             value = _fn ? _fn(obj) : value;

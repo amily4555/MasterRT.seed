@@ -3,6 +3,21 @@
     .ms-panel-body {
         position: relative;
     }
+    
+    .mr-echars-panle-tools {
+        i {
+            cursor: pointer;
+            
+            + i {
+                margin-left: 8px;
+            }
+            
+            &:hover,
+            &.selected {
+                color: #40a9ff;
+            }
+        }
+    }
 }
 
 .ms-echarts-dataView {

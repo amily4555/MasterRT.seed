@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {MrEcharts, MrEchartsProps} from './mr-echarts.component';
-import {MrPanel} from '../';
+import {MrIcon, MrPanel} from '../';
 import _mrEchartServices from './mr-echarts.services';
 import _mrServices from '../common/mr.services';
 import * as _ from 'lodash';
 import * as mu from 'mzmu';
 import {MrEchartsDataView} from './mr-echarts-dataView.component';
+import classNames from 'classnames';
+
 declare var require: any;
 require('../assets/mr-echarts-panel.less');
 
@@ -16,13 +18,13 @@ interface MrEchartsPanelProps extends MrEchartsProps {
 }
 
 export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
-
     state = {
         fullScreen: false,
         xyExchange: false,
         xAxisShowAll: false,
         legendShow: false,
         dataView: false,
+        lineBarExchange: false,
         setting: _mrEchartServices.serialize(this.props.setting)
     };
 
@@ -30,28 +32,30 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
     _dataView: any = [];
 
     tools() {
+        let {fullScreen, xyExchange, xAxisShowAll, legendShow, dataView, lineBarExchange} = this.state;
+
         return (
-            <div>
-                <span onClick={this.download.bind(this)}> - download</span>
-                <span onClick={this.dataView.bind(this)}> - dataView</span>
-                <span onClick={this.toolSetFn.bind(this, 'xyExchange', true)}> - xyExchange</span>
-                <span onClick={this.toolSetFn.bind(this, 'xAxisShowAll', true)}> - xAxisShowAll</span>
-                <span onClick={this.toolSetFn.bind(this, 'legendShow', true)}> - legendShow</span>
-                <span onClick={this.reload.bind(this)}> - reload</span>
-                <span onClick={this.fullScreen.bind(this)}> - Full</span>
+            <div className="mr-echars-panle-tools">
+                <MrIcon type="xiazai" onClick={this.download.bind(this)} />
+                <MrIcon type="table" onClick={this.dataView.bind(this)} className={classNames({selected: dataView})} />
+                <MrIcon type="rotate" onClick={this.toolSetFn.bind(this, 'xyExchange', true)} className={classNames({selected: xyExchange})} />
+                <MrIcon type="bar" onClick={this.toolSetFn.bind(this, 'lineBarExchange', true)} className={classNames({selected: lineBarExchange})} />
+                <MrIcon type="liebiaodanchu" onClick={this.toolSetFn.bind(this, 'xAxisShowAll', true)} className={classNames({selected: xAxisShowAll})} />
+                <MrIcon type="yincang" onClick={this.toolSetFn.bind(this, 'legendShow', true)} className={classNames({selected: legendShow})} />
+                <MrIcon type="shuaxin" onClick={this.reload.bind(this)} />
+                <MrIcon type={fullScreen ? 'suoxiao' : 'fangda'} onClick={this.fullScreen.bind(this)} className={classNames({selected: fullScreen})} />
             </div>
         );
     }
 
     toolSetFn(key: string, value?: any) {
-
         let status = this.state[key];
         let fnName = `@@${key}`;
         let {setting} = this.state;
 
         status = !status;
 
-        if(status){
+        if (status) {
             setting.push({[fnName]: mu.ifnvl(value, true)});
         } else {
             _.remove(setting, (o) => {
@@ -59,8 +63,11 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
             });
         }
 
-        this.setState({[key]: status, setting});
-    };
+        this.setState({
+            [key]: status,
+            setting
+        });
+    }
 
     // 全屏显示
     fullScreen() {
@@ -73,7 +80,7 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
     dataView() {
         this.setState({
             dataView: !this.state.dataView
-        })
+        });
     }
 
     // download 下载数据
@@ -87,7 +94,10 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
     reload() {
         let {setting} = this.props;
         setting = _mrEchartServices.serialize(setting);
-        this.setState({setting, dataView: false});
+        this.setState({
+            setting,
+            dataView: false
+        });
     }
 
     // 获得 echart callback data
@@ -96,7 +106,6 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
     }
 
     render() {
-
         const {title, style} = this.props;
         const {data, dataType, dataModel, chartTypes} = this.props;
         const {options, renderType, theme} = this.props;
@@ -113,10 +122,16 @@ export class MrEchartsPanel extends React.Component<MrEchartsPanelProps, {}> {
             theme
         };
 
-        return (<MrPanel title={title} extra={this.tools()} style={style}
-                         className={[fullScreen ? 'ms-fullScreen' : '', 'ms-echarts-panel'].join(' ')}>
-            { dataView ? <div><MrEchartsDataView data={this._dataView} /></div> : <MrEcharts {...echartsProps} result={this.getResult.bind(this)} />}
-        </MrPanel>);
+        return (
+            <MrPanel title={title} extra={this.tools()} style={style} className={[fullScreen ? 'ms-fullScreen' : '', 'ms-echarts-panel'].join(' ')}>
+                {dataView ? (
+                    <div>
+                        <MrEchartsDataView data={this._dataView} />
+                    </div>
+                ) : (
+                    <MrEcharts {...echartsProps} result={this.getResult.bind(this)} />
+                )}
+            </MrPanel>
+        );
     }
-
 }
