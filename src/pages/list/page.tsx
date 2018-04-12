@@ -1,7 +1,7 @@
 import React from 'react';
 import router from 'umi/router';
 import styles from './page.less';
-import {MrDownload, MrEcharts, MrEchartsPanel, MrIf, MrPanel, MrResource} from '../../lib';
+import {MrCol, MrDownload, MrEcharts, MrEchartsPanel, MrFill, MrIf, MrPanel, MrResource} from '../../lib';
 import Button from 'antd/lib/button/button';
 // import {MrEcharts} from 'masterrt';
 
@@ -3998,6 +3998,12 @@ export default () => {
                 setting={{'legend.show': false}}
             />
 
+            <MrFill gutter={16} style={{height: 300}}>
+                <MrCol span={2} scroll={true}>1</MrCol>
+                <MrCol span={1}>2</MrCol>
+                <MrCol span={3}>3</MrCol>
+                <MrCol>4</MrCol>
+            </MrFill>
         </div>
     );
 };

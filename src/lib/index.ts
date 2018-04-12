@@ -7,3 +7,5 @@ export {MrEchartsPanel} from './mr-echarts/mr-echarts-panel.component';
 export {MrDownload} from './mr-download/mr-download.component';
 export {MrIf} from './mr-if/mr-if.component';
 export {MrIcon} from './mr-icon/mr-icon.component';
+export {MrFill} from './mr-fill/mi-fill.component';
+export {MrCol} from './mr-fill/mr-col.component';
