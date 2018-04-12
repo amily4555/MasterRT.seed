@@ -21,3 +21,9 @@
 ### 0.1.8
 
 修复react每次setState后Echart图表每次重新渲染的问题
+
+### 0.1.9
+
+添加MrIcon, MrFill, MrCol, MrPanel, MrEchartsPanel 控件
+
+MrChartsPanel 添加 tools
