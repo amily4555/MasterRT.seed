@@ -1,7 +1,7 @@
-import * as download from '../assets/download';
+import * as download from '../assets/js/download';
 import * as mu from 'mzmu';
 declare var require: any;
-const _commonStyles = require('../assets/common.less');
+const _commonStyles = require('../assets/styles/common.less');
 
 /**
  * 通用方法

@@ -9,7 +9,7 @@ import {MrEchartsDataView} from './mr-echarts-dataView.component';
 import classNames from 'classnames';
 
 declare var require: any;
-require('../assets/mr-echarts-panel.less');
+require('../assets/styles/mr-echarts-panel.less');
 
 interface MrEchartsPanelProps extends MrEchartsProps {
     style?: any;

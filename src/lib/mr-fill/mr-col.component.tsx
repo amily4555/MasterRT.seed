@@ -2,7 +2,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import * as _ from 'lodash';
 declare var require: any;
-require('../assets/mr-fill.less');
+require('../assets/styles/mr-fill.less');
 
 interface MrColProps {
     span?: number;

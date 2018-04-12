@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import * as mu from 'mzmu';
 import {Children, cloneElement} from 'react';
 declare var require: any;
-require('../assets/mr-fill.less');
+require('../assets/styles/mr-fill.less');
 
 interface MrFillProps {
     className?: string;

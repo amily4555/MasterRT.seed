@@ -3,11 +3,11 @@ import * as echarts from 'echarts';
 import * as _ from 'lodash';
 import * as mu from 'mzmu';
 import 'echarts-wordcloud';
-import '../assets/china.js';
-import '../assets/theme.customed.js';
+import '../assets/js/china.js';
+import '../assets/js/theme.customed.js';
 import _sevr from './mr-echarts.services';
 declare var require: any;
-require('../assets/mr-echarts.component.less');
+require('../assets/styles/mr-echarts.component.less');
 
 // mark
 // 监听dom变化

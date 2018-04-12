@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {MrIf} from '../mr-if/mr-if.component';
 declare var require: any;
-require('./mr-panel.less');
+require('../assets/styles/mr-panel.less');
 import _sevr from '../common/mr.services';
 
 interface MrPanelProps {
