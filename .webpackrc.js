@@ -11,6 +11,9 @@ export default {
     alias: {
         components: resolve(__dirname, './components')
     },
+    theme: {
+        'primary-color': '#307fff'
+    },
     disableCSSModules: true
 
 };
