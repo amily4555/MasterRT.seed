@@ -10,5 +10,7 @@ export default {
     },
     alias: {
         components: resolve(__dirname, './components')
-    }
+    },
+    disableCSSModules: true
+
 };
