@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 import * as _ from 'lodash';
 declare var require: any;
 require('../assets/styles/mr-icon.less');

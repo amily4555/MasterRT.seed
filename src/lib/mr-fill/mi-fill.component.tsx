@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 import * as _ from 'lodash';
 import * as mu from 'mzmu';
 import {Children, cloneElement} from 'react';
@@ -30,14 +30,12 @@ export class MrFill extends React.Component<MrFillProps, {}> {
                 return null;
             }
 
-            console.debug(col);
-
             if (col.props && gutter > 0) {
                 return cloneElement(col, {
                     style: {
                         paddingLeft: (gutter as number) / 2,
                         paddingRight: (gutter as number) / 2,
-                        ...col.props.style,
+                        ...col.props['style'],
                     },
                 });
             }
