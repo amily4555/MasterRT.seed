@@ -31,10 +31,16 @@ export class MrFill extends React.Component<MrFillProps, {}> {
             }
 
             if (col.props && gutter > 0) {
+
+                let _gutter = gutter / 2;
+
+                style['marginLeft'] = -_gutter;
+                style['marginRight'] = -_gutter;
+
                 return cloneElement(col, {
                     style: {
-                        paddingLeft: (gutter as number) / 2,
-                        paddingRight: (gutter as number) / 2,
+                        paddingLeft: _gutter,
+                        paddingRight: _gutter,
                         ...col.props['style'],
                     },
                 });

@@ -3,6 +3,7 @@ import {MrIf} from '../mr-if/mr-if.component';
 declare var require: any;
 require('../assets/styles/mr-panel.less');
 import _sevr from '../common/mr.services';
+import * as classNames from 'classnames';
 
 interface MrPanelProps {
     style?: any;
@@ -20,22 +21,28 @@ export class MrPanel extends React.Component<MrPanelProps, {}> {
         const {style, className = '', title = '', extra, bodyStyle} = this.props;
         const [_title, _subTitle] = title.split('::');
 
-        return (<article style={style} className={_sevr.cls('ms-panel', ...className.split(' '))}>
-            <header>
-                <div className={'ms-panel-header'}>
-                    <span className={'ms-panel-title'}>{_title}</span>
-                    <MrIf condition={_subTitle}>
-                        <small className={'ms-panel-subTitle'}>{_subTitle}</small>
-                    </MrIf>
-                    <div className={'ms-panel-headerExtra'}>{extra}</div>
-                </div>
-            </header>
+        const classString = classNames({
+            'ms-panel': true,
+        }, className);
 
-            <section>
-                <div style={bodyStyle} className={_sevr.cls('ms-panel-body')}>
-                    {this.props.children}
-                </div>
-            </section>
-        </article>);
+        return (
+            <article style={style} className={classString}>
+                <header>
+                    <div className={'ms-panel-header'}>
+                        <span className={'ms-panel-title'}>{_title}</span>
+                        <MrIf condition={_subTitle}>
+                            <small className={'ms-panel-subTitle'}>{_subTitle}</small>
+                        </MrIf>
+                        <div className={'ms-panel-headerExtra'}>{extra}</div>
+                    </div>
+                </header>
+
+                <section>
+                    <div style={bodyStyle} className={'ms-panel-body'}>
+                        {this.props.children}
+                    </div>
+                </section>
+            </article>
+        );
     }
 }
