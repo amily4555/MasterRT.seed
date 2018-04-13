@@ -11,7 +11,7 @@ export class MrIf extends React.Component<MrIfProps, {}> {
 
     _result: boolean = true;
 
-    _rules: any = MrServices.getRules();
+    _rules: any = (MrServices.getRules() || {});
 
     getResult(props: MrIfProps) {
         mu.exist(props.condition, (condition) => {

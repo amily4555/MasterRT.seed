@@ -2,7 +2,6 @@ import * as React from 'react';
 import {MrIf} from '../mr-if/mr-if.component';
 declare var require: any;
 require('../assets/styles/mr-panel.less');
-import _sevr from '../common/mr.services';
 import * as classNames from 'classnames';
 
 interface MrPanelProps {
@@ -11,6 +10,8 @@ interface MrPanelProps {
     title?: string;
     extra?: any;
     className?: string;
+    // wrapper, title, all
+    border?: string;
 }
 
 export class MrPanel extends React.Component<MrPanelProps, {}> {
@@ -18,11 +19,12 @@ export class MrPanel extends React.Component<MrPanelProps, {}> {
 
     render() {
 
-        const {style, className = '', title = '', extra, bodyStyle} = this.props;
+        const {style, className = '', title = '', extra, bodyStyle, border = 'all'} = this.props;
         const [_title, _subTitle] = title.split('::');
 
         const classString = classNames({
             'ms-panel': true,
+            [`ms-border-${border}`]: !!border
         }, className);
 
         return (
