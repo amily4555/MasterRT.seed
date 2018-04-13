@@ -1,67 +1,70 @@
 import * as  React from 'react';
-import {MrFill, MrCol} from 'masterrt';
+import {MrFill, MrCol, MrIcon} from 'masterrt';
 import './masterrt.less';
-import * as hanabi from 'hanabi';
+import MrsHTML from '../../components/MrsHTML';
+
+import MrsCode from '../../components/MrsCode';
+
+import renderHTML from 'react-render-html';
+import JsxParser from 'react-jsx-parser';
 
 interface MrsMrFillProps {
 }
 
 export default class MrsMrFill extends React.Component<MrsMrFillProps, {}> {
 
-    exp() {
-        return (
-            <section>
-                <MrFill gutter={8} style={{height: 100}}>
-                    <MrCol span={4}>
-                        <div className="content">
-                            4
-                        </div>
-                    </MrCol>
-                    <MrCol span={2}>
-                        <div className="content">
-                            2
-                        </div>
-                    </MrCol>
-                    <MrCol span={8}>
-                        <div className="content">
-                            8
-                        </div>
-                    </MrCol>
-                </MrFill>
+    code: string = `
+        <section>
+            <MrFill gutter={8} style={{height: 100}}>
+                <MrCol span={4}>
+                    <div className="content">
+                        4
+                    </div>
+                </MrCol>
+                <MrCol span={2}>
+                    <div className="content">
+                        2
+                    </div>
+                </MrCol>
+                <MrCol span={8}>
+                    <div className="content">
+                        8
+                    </div>
+                </MrCol>
+            </MrFill>
 
-                <MrFill gutter={8} style={{height: 100, marginTop: 8}}>
-                    <MrCol span={1}>
-                        <div className="content">
-                            1
-                        </div>
-                    </MrCol>
-                    <MrCol span={3}>
-                        <div className="content">
-                            3
-                        </div>
-                    </MrCol>
-                    <MrCol>
-                        <div className="content">
-                            7
-                        </div>
-                    </MrCol>
-                    <MrCol>
-                        <div className="content">
-                            12
-                        </div>
-                    </MrCol>
-                </MrFill>
+            <MrFill gutter={8} style={{height: 100, marginTop: 8}}>
+                <MrCol span={1}>
+                    <div className="content">
+                        1
+                    </div>
+                </MrCol>
+                <MrCol span={3}>
+                    <div className="content">
+                        3
+                    </div>
+                </MrCol>
+                <MrCol>
+                    <div className="content">
+                        7
+                    </div>
+                </MrCol>
+                <MrCol>
+                    <div className="content">
+                        12
+                    </div>
+                </MrCol>
+            </MrFill>
 
-                <MrFill gutter={8} style={{height: 100, marginTop: 8}}>
-                    <MrCol>
-                        <div className="content">
-                            1
-                        </div>
-                    </MrCol>
-                </MrFill>
-            </section>
-        );
-    }
+            <MrFill gutter={8} style={{height: 100, marginTop: 8}}>
+                <MrCol>
+                    <div className="content">
+                        1
+                    </div>
+                </MrCol>
+            </MrFill>
+        </section>
+    `;
 
     render() {
         return (
@@ -69,12 +72,18 @@ export default class MrsMrFill extends React.Component<MrsMrFillProps, {}> {
                 <header>MrFill <small>满格化布局</small></header>
                 <ins>区别于栅格化布局，其特色为不管有多少子模块，其宽度总和为100%</ins>
                 <main>
-                    {this.exp()}
+                    <JsxParser
+                        components={{MrFill, MrCol}}
+                        jsx={this.code}
+                    ></JsxParser>
                 </main>
 
-                {hanabi('<div>abss</div>')}
+                <details className="mt-16">
+                    <summary>查看源码</summary>
+                    <MrsCode code={(this.code)}></MrsCode>
+                </details>
 
-                <aside>
+                <aside className="mt-16">
                     <h5>MrFill</h5>
                     <table>
                         <tbody>

@@ -30,24 +30,24 @@ export default class MrsLayout extends React.Component<MrsLayoutProps, {}> {
                                         <Link to="/masterrt/mr-fill">MrFill</Link>
                                     </Menu.Item>
                                     <Menu.Item key="12">
-                                        <Link to="/list">MrPanel</Link>
+                                        <Link to="/masterrt/mr-panel">MrPanel</Link>
                                     </Menu.Item>
                                     <Menu.Item key="13">
-                                        <Link to="/list">MrIcon</Link>
+                                        <Link to="/masterrt/mr-icon">MrIcon</Link>
                                     </Menu.Item>
                                 </MenuItemGroup>
                                 <MenuItemGroup key="g2" title="解决方案">
                                     <Menu.Item key="MrEcharts">
-                                        <Link to="/list">MrEcharts</Link>
+                                        <Link to="/masterrt/mr-echarts">MrEcharts</Link>
                                     </Menu.Item>
                                     <Menu.Item key="MrEchartsPanel">
-                                        <Link to="/list">MrEchartsPanel</Link>
+                                        <Link to="/masterrt/mr-echarts-panel">MrEchartsPanel</Link>
                                     </Menu.Item>
                                     <Menu.Item key="MrDownload">
-                                        <Link to="/list">MrDownload</Link>
+                                        <Link to="/masterrt/mr-download">MrDownload</Link>
                                     </Menu.Item>
                                     <Menu.Item key="MrIf">
-                                        <Link to="/list">MrIf</Link>
+                                        <Link to="/masterrt/mr-if">MrIf</Link>
                                     </Menu.Item>
                                 </MenuItemGroup>
                                 <MenuItemGroup key="g3" title="服务及配置">

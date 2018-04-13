@@ -1,3 +1,7 @@
-export default class MrsServices {
-
+class MrsServices {
+    showHtml() {
+        return;
+    }
 }
+
+export default MrsServices;

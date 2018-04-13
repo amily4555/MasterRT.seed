@@ -18,7 +18,7 @@ export default {
     },
     effects: {
         *login({params}, {call, put}) {
-            yield call(api.getBrands, params);
+            // yield call(api.getBrands, params);
         }
     }
 };
