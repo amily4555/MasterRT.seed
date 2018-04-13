@@ -1,10 +1,11 @@
 import * as  React from 'react';
-import {MrPanel, MrIcon, MrIf} from 'masterrt';
+import {MrPanel, MrIcon, MrIf, MrFill, MrCol, MrServices} from 'masterrt';
 import './masterrt.less';
 
 import MrsCode from '../../components/MrsCode';
 
 import JsxParser from 'react-jsx-parser';
+import Button from 'antd/lib/button/button';
 
 interface MrsPanelProps {
 }
@@ -15,9 +16,16 @@ export default class MrsPanel extends React.Component<MrsPanelProps, {}> {
         showPanel: false
     };
 
+    rules: any = {
+        'show.jingyesi': true,
+        'show.dengguanquelou': false,
+        'show.minnong': true
+    };
+
     code: string = `
         <section>
-            <MrIf condition={this.state.showPanel}>
+        
+            <MrIf condition={showPanel}>
                 <MrPanel title="静夜思::李白">
                     床前明月光<br />
                     疑是地上霜<br />
@@ -26,53 +34,92 @@ export default class MrsPanel extends React.Component<MrsPanelProps, {}> {
                 </MrPanel>
             </MrIf>
             
+            <MrPanel title="按权限规则判断::rule">
+                <MrFill gutter={16} style={{}}>
+                    <MrIf rules={'show.jingyesi-1'}>
+                        <MrCol span="1">
+                            <MrPanel title="静夜思::show.jingyesi">
+                                床前明月光<br />
+                                疑是地上霜<br />
+                                举头望明月<br />
+                                低头思故乡<br />
+                            </MrPanel>
+                        </MrCol>
+                    </MrIf>
+                    <MrIf rules={'show.dengguanquelou'}>
+                        <MrCol span="1">
+                            <MrPanel title="登鹳雀楼::show.dengguanquelou">
+                                白日依山尽，黄河入海流。<br />
+                                欲穷千里目，更上一层楼。<br />
+                            </MrPanel>
+                        </MrCol>
+                    </MrIf>
+                    <MrIf rules={'show.minnong'}>
+                        <MrCol span="1">
+                            <MrPanel title="悯农::show.minnong">
+                                锄禾日当午 汗滴禾下土<br />
+                                谁知盘中餐 粒粒皆辛苦<br />
+                            </MrPanel>
+                        </MrCol>
+                    </MrIf>
+                </MrFill>
+            </MrPanel>
             
         </section>
     `;
 
 
+    showPanel() {
+        let showPanel = !this.state.showPanel;
+        this.setState({showPanel});
+    }
+
+    componentWillMount() {
+        MrServices.setRules(this.rules);
+    }
 
     render() {
-        console.debug(this.state.showPanel);
+        let {showPanel} = this.state;
+
         return (
             <article className="mrs-article mrs-MrFill">
                 <header>MrPanel <small>一个集成的盒子</small></header>
                 <ins>一个拥有标题，子标题，工具条的容器</ins>
                 <main>
+
+                    <Button type="primary" onClick={this.showPanel.bind(this)}>{showPanel? '隐藏' : '显示' }::静夜思</Button>
+
                     <JsxParser
-                        components={{MrPanel, MrIcon}}
+                        bindings={{showPanel}}
+                        components={{MrIf, MrPanel, MrFill, MrCol, MrsCode}}
                         jsx={this.code}
                     ></JsxParser>
                 </main>
 
                 <details className="mt-16">
                     <summary>查看源码</summary>
-                    <MrsCode code={(this.code)}></MrsCode>
+                    <MrsCode code={this.code}></MrsCode>
                 </details>
 
                 <aside className="mt-16">
-                    <h5>MrPanel</h5>
                     <table>
                         <tbody>
                             <tr>
-                                <td>title?: string</td>
-                                <td>标题，title::subTitle, 以'::'区分主从标题</td>
+                                <td>condition?: any</td>
+                                <td>根据条件真假值，判断是否显示</td>
                             </tr>
                             <tr>
-                                <td>extra?: ReactDOM</td>
-                                <td>附加栏</td>
-                            </tr>
-                            <tr>
-                                <td>border?: string</td>
+                                <td>rule?: string</td>
                                 <td>
-                                    wrapper: 显示 panel border <br />
-                                    title: 显示 title border-bottom <br />
-                                    all: 同事显示 wrapper 跟 title 效果 <br />
+                                    规则权限 <br />
+
+                                    规则为一个JSON，需要配置到通过MrServices进行配置 <br />
+
+                                    <MrsCode code={'MrServices.setRules({\'show.jingyesi\': true,\n' +
+                                    '        \'show.dengguanquelou\': false,\n' +
+                                    '        \'show.minnong\': true})'}></MrsCode>
+
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>bodyStyle?: React.CSSProperties</td>
-                                <td>负责panel body 样式</td>
                             </tr>
                         </tbody>
                     </table>
